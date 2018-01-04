@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, sessions, flash
+from flask import Flask, request, redirect, render_template, sessions, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -46,8 +46,9 @@ def newpost():
             db.session.add(new_blog)
             db.session.commit()
 
-            new_id = "/blog?id=" + str(new_blog.id)
-            return redirect(new_id)
+            #new_id = "/blog?id=" + str(new_blog.id) 
+            #new_id = url_for('blog',id=str(new_blog.id))
+            return redirect(url_for('blog',id=str(new_blog.id)))
 
         else:
             flash('You must enter something in every field', 'error')
